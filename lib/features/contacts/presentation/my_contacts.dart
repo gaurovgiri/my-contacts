@@ -26,6 +26,8 @@ class MyContactsDesign extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               // Create a listtile for each contact
