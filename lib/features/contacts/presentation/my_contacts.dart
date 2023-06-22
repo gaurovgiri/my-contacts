@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_contact/features/contacts/data/contact.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 List<Contact> contacts = [
   Contact('John Doe', '+1 123-456-7890'),
@@ -33,11 +34,17 @@ class MyContactsDesign extends StatelessWidget {
               // Create a listtile for each contact
               children: [
                 ListTile(
-                  leading: const Icon(Icons.person),
-                  title: Text(contacts[index].name),
-                  subtitle: Text(contacts[index].contact),
-                  trailing: const Icon(Icons.phone),
-                )
+                    leading: const Padding(
+                      padding: EdgeInsets.only(top: 8),
+                      child: Icon(Icons.person),
+                    ),
+                    title: Text(contacts[index].name),
+                    subtitle: Text(contacts[index].contact),
+                    trailing: const Icon(Icons.phone),
+                    onTap: () {
+                      // Call the contact
+                      launchUrl(Uri.parse('tel:${contacts[index].contact}'));
+                    })
               ],
             ),
           ),
