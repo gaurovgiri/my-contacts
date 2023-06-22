@@ -25,12 +25,19 @@ class MyContactsDesign extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(contacts[index].name),
-              Text(contacts[index].contact)
-            ],
+          child: Card(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // Create a listtile for each contact
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.person),
+                  trailing: const Icon(Icons.phone),
+                  title: Text(contacts[index].name),
+                  subtitle: Text(contacts[index].contact),
+                )
+              ],
+            ),
           ),
         );
       },
