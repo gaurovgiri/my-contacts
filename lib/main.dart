@@ -10,6 +10,9 @@ class MyContacts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: MyContactsDesign());
+    return const MaterialApp(
+      home: MyContactsDesign(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
