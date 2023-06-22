@@ -34,9 +34,9 @@ class MyContactsDesign extends StatelessWidget {
               children: [
                 ListTile(
                   leading: const Icon(Icons.person),
-                  trailing: const Icon(Icons.phone),
                   title: Text(contacts[index].name),
                   subtitle: Text(contacts[index].contact),
+                  trailing: const Icon(Icons.phone),
                 )
               ],
             ),
