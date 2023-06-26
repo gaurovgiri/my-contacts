@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:my_contact/features/contacts/data/contact.dart';
+import 'package:my_contact/features/contacts/presentation/widgets/contact_cards.dart';
 
 class ContactSearchDelegate extends SearchDelegate<String> {
   List<String> name;
@@ -12,7 +14,11 @@ class ContactSearchDelegate extends SearchDelegate<String> {
     return [
       IconButton(
           onPressed: () {
-            query = '';
+            if (query.isEmpty) {
+              close(context, '');
+            } else {
+              query = '';
+            }
           },
           icon: const Icon(Icons.clear))
     ];
@@ -29,37 +35,30 @@ class ContactSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final suggestionList = query.isEmpty
-        ? name
-        : name
-            .where((element) =>
-                element.toLowerCase().startsWith(query.toLowerCase()))
-            .toList();
-    return ListView.builder(
-        itemCount: suggestionList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(suggestionList[index]),
-            subtitle: Text(phoneNumber[index]),
-          );
-        });
+    return searchResultList();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty
-        ? name
+    return searchResultList();
+  }
+
+  Widget searchResultList() {
+    final resultList = query.isEmpty
+        ? []
         : name
             .where((element) =>
-                element.toLowerCase().startsWith(query.toLowerCase()))
+                element.toLowerCase().contains(query.toLowerCase()))
             .toList();
+
     return ListView.builder(
-        itemCount: suggestionList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(suggestionList[index]),
-            subtitle: Text(phoneNumber[index]),
-          );
-        });
+      itemCount: resultList.length,
+      itemBuilder: (context, index) {
+        String currentName = resultList[index];
+        String contactNumber = phoneNumber[name.indexOf(currentName)];
+
+        return ContactCards(currentName, contactNumber);
+      },
+    );
   }
 }

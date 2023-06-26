@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_contact/features/contacts/data/contact.dart';
 import 'package:my_contact/features/contacts/presentation/contact_search_delegate.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:my_contact/features/contacts/presentation/widgets/contact_cards.dart';
 
 List<Contact> contacts = [
   Contact('John Doe', '+1 123-456-7890'),
@@ -39,45 +39,7 @@ class MyContactsDesign extends StatelessWidget {
         body: ListView.builder(
           itemCount: contacts.length,
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // Create a listtile for each contact
-                  children: [
-                    ListTile(
-                      leading: const Padding(
-                        padding: EdgeInsets.only(top: 8),
-                        child: Icon(Icons.person),
-                      ),
-                      title: Text(contacts[index].name),
-                      subtitle: Text(contacts[index].contact),
-                      // trailing: const Icon(Icons.phone),
-                      trailing: // create phone and sms
-                          Row(mainAxisSize: MainAxisSize.min, children: [
-                        IconButton(
-                          onPressed: () {
-                            launchUrl(
-                                Uri.parse('tel:${contacts[index].contact}'));
-                          },
-                          icon: const Icon(Icons.phone),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            launchUrl(
-                                Uri.parse('sms:${contacts[index].contact}'));
-                          },
-                          icon: const Icon(Icons.sms),
-                        ),
-                      ]),
-                    )
-                  ],
-                ),
-              ),
-            );
+            return ContactCards(contacts[index].name, contacts[index].contact);
           },
         ));
   }
