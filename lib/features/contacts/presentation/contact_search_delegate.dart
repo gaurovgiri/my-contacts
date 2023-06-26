@@ -20,19 +20,46 @@ class ContactSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    throw UnimplementedError();
+    return IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          close(context, '');
+        });
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
+    final suggestionList = query.isEmpty
+        ? name
+        : name
+            .where((element) =>
+                element.toLowerCase().startsWith(query.toLowerCase()))
+            .toList();
+    return ListView.builder(
+        itemCount: suggestionList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(suggestionList[index]),
+            subtitle: Text(phoneNumber[index]),
+          );
+        });
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
+    final suggestionList = query.isEmpty
+        ? name
+        : name
+            .where((element) =>
+                element.toLowerCase().startsWith(query.toLowerCase()))
+            .toList();
+    return ListView.builder(
+        itemCount: suggestionList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(suggestionList[index]),
+            subtitle: Text(phoneNumber[index]),
+          );
+        });
   }
 }
