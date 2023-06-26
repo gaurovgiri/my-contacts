@@ -45,6 +45,5 @@ class ContactCards extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

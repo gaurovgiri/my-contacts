@@ -1,6 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:my_contact/features/contacts/data/contact.dart';
 import 'package:my_contact/features/contacts/presentation/widgets/contact_cards.dart';
 
 class ContactSearchDelegate extends SearchDelegate<String> {
